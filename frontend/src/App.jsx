@@ -11,6 +11,7 @@ import BalanceSection from './components/BalanceSection';
 import SpinButton from './components/SpinButton';
 import WinAnimation from './components/WinAnimation';
 import LoseAnimation from './components/LoseAnimation';
+import jackpotGif from '../assets/jackpot.gif';
 
 function App() {
   const [balance, setBalance] = useState(1000);
@@ -97,7 +98,7 @@ function App() {
           {[...Array(10)].map((_, index) => (
             <SwiperSlide key={index}>
               <img
-                src="/jackpot.gif"
+                src={jackpotGif}
                 alt="Winner GIF"
                 className="w-[10vh] h-[10vh]"
               />
@@ -123,7 +124,11 @@ function App() {
         >
           {[...Array(10)].map((_, index) => (
             <SwiperSlide key={index}>
-              <img src={import.meta.env.BASE_URL + 'jackpot.gif'} alt="Winner GIF" className="w-[10vh] h-[10vh]" />
+              <img
+                src={jackpotGif}
+                alt="Winner GIF"
+                className="w-[10vh] h-[10vh]"
+              />
             </SwiperSlide>
           ))}
         </Swiper>
