@@ -11,7 +11,7 @@ import BalanceSection from './components/BalanceSection';
 import SpinButton from './components/SpinButton';
 import WinAnimation from './components/WinAnimation';
 import LoseAnimation from './components/LoseAnimation';
-import jackpotGif from '../assets/jackpot.gif';
+import jackpotGif from './assets/jackpot.gif';
 
 function App() {
   const [balance, setBalance] = useState(1000);
