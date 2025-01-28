@@ -16,7 +16,7 @@ const NumberCard = ({ numbers, spinning }) => {
   ];
 
   return (
-    <div className="flex justify-center space-x-4 my-4">
+    <div className="flex justify-center space-x-4">
       {numbers.map((num, index) => (
         <div
           key={index}
