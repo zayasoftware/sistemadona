@@ -123,11 +123,7 @@ function App() {
         >
           {[...Array(10)].map((_, index) => (
             <SwiperSlide key={index}>
-              <img
-                src="/jackpot.gif"
-                alt="Winner GIF"
-                className="w-[10vh] h-[10vh]"
-              />
+              <img src={import.meta.env.BASE_URL + 'jackpot.gif'} alt="Winner GIF" className="w-[10vh] h-[10vh]" />
             </SwiperSlide>
           ))}
         </Swiper>
