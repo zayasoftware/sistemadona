@@ -1,7 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-
-// Importe os estilos do Swiper
 import 'swiper/css';
 
 // Exemplo de ícones para o carrossel (substitua pelos seus ícones)
@@ -20,11 +18,11 @@ const icons = [
 
 const AdSection = () => {
   return (
-    <div className="w-full flex justify-center my-4">
-      <div className="w-1/2 p-4 rounded-lg">
+    <div className="w-[380px] mx-auto flex justify-center my-4">
+      <div className="w-full p-4 rounded-lg">
         <Swiper
-          spaceBetween={-20} // Slides se sobrepõem em 20 pixels
-          slidesPerView={3} // Número de ícones visíveis ao mesmo tempo
+          spaceBetween={20} // Espaçamento entre os slides
+          slidesPerView={1} // Número padrão de ícones visíveis (para telas pequenas)
           centeredSlides={true} // Centraliza o slide ativo
           loop={true} // Carrossel infinito
           autoplay={{
@@ -34,10 +32,27 @@ const AdSection = () => {
           speed={2000} // Velocidade da animação
           modules={[Autoplay]} // Módulos do Swiper
           className="mySwiper"
+          breakpoints={{
+            // Em telas pequenas (>= 640px), mostra 2 ícones
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            // Em telas médias (>= 768px), mostra 3 ícones
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            // Em telas grandes (>= 1024px), mostra 4 ícones
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+          }}
         >
           {icons.map((icon) => (
             <SwiperSlide key={icon.id}>
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg">
+              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg mx-auto">
                 <span className="text-2xl">{icon.icon}</span> {/* Exibe o ícone */}
               </div>
             </SwiperSlide>

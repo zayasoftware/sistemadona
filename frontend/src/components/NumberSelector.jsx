@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const NumberSelector = ({ onSelect }) => {
   const [selectedNumbers, setSelectedNumbers] = useState([]);
 
-  // Lista de cores para os números
+  // Lista de cores para os números selecionados
   const colors = [
     'bg-red-500',
     'bg-blue-500',
@@ -38,10 +38,10 @@ const NumberSelector = ({ onSelect }) => {
           <div
             key={number}
             onClick={() => handleNumberClick(number)}
-            className={`w-16 h-16 flex items-center justify-center text-xl font-bold rounded-full cursor-pointer ${
+            className={`w-12 h-12 flex items-center justify-center text-xl font-bold rounded-full cursor-pointer ${
               selectedNumbers.includes(number)
-                ? 'bg-white-500 text-white' // Cor quando o número está selecionado
-                : colors[number % colors.length] // Cor de fundo com base no número
+                ? `${colors[number % colors.length]} text-white` // Cor da lista para números selecionados
+                : 'bg-gray-300 text-black' // Cor neutra para números não selecionados
             }`}
           >
             {number}

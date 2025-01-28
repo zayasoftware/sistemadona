@@ -20,7 +20,7 @@ const NumberCard = ({ numbers, spinning }) => {
       {numbers.map((num, index) => (
         <div
           key={index}
-          className={`w-16 h-16 flex items-center justify-center text-4xl font-bold rounded-full ${
+          className={`w-12 h-12 flex items-center justify-center text-4xl font-bold rounded-full ${
             colors[index % colors.length] // Usa a cor correspondente ao índice
           } ${spinning ? 'animate-spin' : ''}`}
         >
