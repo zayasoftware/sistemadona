@@ -80,8 +80,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-purple-950 text-white relative overflow-hidden">
-      {/* Coluna vertical de GIFs à esquerda */}
-      <div className="absolute left-72 top-0 w-[10vh] h-full z-0 overflow-hidden">
+      {/* Coluna vertical de GIFs à esquerda (oculta em dispositivos móveis) */}
+      <div className="hidden md:block absolute left-72 top-0 w-[10vh] h-full z-0 overflow-hidden">
         <Swiper
           direction="vertical"
           autoplay={{
@@ -107,8 +107,8 @@ function App() {
         </Swiper>
       </div>
 
-      {/* Coluna vertical de GIFs à direita */}
-      <div className="absolute right-72 top-0 w-[10vh] h-full z-0 overflow-hidden">
+      {/* Coluna vertical de GIFs à direita (oculta em dispositivos móveis) */}
+      <div className="hidden md:block absolute right-72 top-0 w-[10vh] h-full z-0 overflow-hidden">
         <Swiper
           direction="vertical"
           autoplay={{
@@ -142,7 +142,9 @@ function App() {
           <NumberSelector onSelect={setSelectedNumbers} />
           <AdSection />
           <BalanceSection balance={balance} bet={bet} lastWin={lastWin} onBetChange={handleBetChange} />
-          <SpinButton onClick={handleSpin} spinning={spinning} />
+          <div className="w-full flex justify-center">
+            <SpinButton onClick={handleSpin} spinning={spinning} />
+          </div>
         </div>
       </div>
 
