@@ -39,7 +39,7 @@ const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpi
       {/* Botão de aumentar valor da aposta (+) */}
       <button
         onClick={onIncreaseBet}
-        className="bg-yellow-500 text-white w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-yellow-600 transition-colors"
+        className="bg-yellow-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-yellow-600 transition-colors"
       >
         <FaPlus className="text-sm" />
       </button>
@@ -47,7 +47,7 @@ const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpi
       {/* Botão de giro automático (Player) */}
       <button
         onClick={onAutoSpin}
-        className="bg-purple-500 text-white w-6 h-6 flex items-center justify-center rounded-full shadow-lg hover:bg-purple-600 transition-colors"
+        className="bg-purple-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-purple-600 transition-colors"
       >
         <FaPlay className="text-sm" />
       </button>

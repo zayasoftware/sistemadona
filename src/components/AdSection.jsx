@@ -18,7 +18,7 @@ const icons = [
 
 const AdSection = () => {
   return (
-    <div className="w-[380px] mx-auto flex justify-center my-4">
+    <div className="w-[380px] mx-auto flex justify-center">
       <div className="w-full p-4 rounded-lg">
         <Swiper
           spaceBetween={20} // Espaçamento entre os slides
