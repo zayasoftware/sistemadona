@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import { ImSpinner11 } from 'react-icons/im'; // Ícone para girar
 import { FaBolt, FaMinus, FaPlus, FaPlay } from 'react-icons/fa'; // Ícones para raio, -, + e player
+import spinButtonImg from '../assets/spin-button.png'; // Imagem do botão de spin normal
+import spinButtonPressedImg from '../assets/spin-button-pressed.png'; // Imagem do botão de spin pressionado
 
 const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpin }) => {
   return (
@@ -10,7 +11,7 @@ const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpi
         onClick={() => alert('Modo Turbo ativado!')} // Substitua por uma função adequada
         className="bg-blue-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-blue-600 transition-colors"
       >
-        <FaBolt className="text-sm" />
+        <FaBolt className="text-xl pulse-animation" /> {/* Animação aplicada sempre */}
       </button>
 
       {/* Botão de diminuir valor da aposta (-) */}
@@ -18,22 +19,21 @@ const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpi
         onClick={onDecreaseBet}
         className="bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-red-600 transition-colors"
       >
-        <FaMinus className="text-sm" />
+        <FaMinus className="text-xl pulse-animation" /> {/* Animação aplicada sempre */}
       </button>
 
       {/* Botão de girar (maior e central) */}
       <button
         onClick={onClick}
-        className={`bg-green-500 text-white w-16 h-16 flex items-center justify-center rounded-full text-2xl font-bold shadow-lg hover:bg-green-600 transition-colors ${
-          spinning ? 'animate-spin' : ''
-        }`}
+        className={`w-20 h-16 flex items-center justify-center rounded-full shadow-lg transition-colors`}
         disabled={spinning}
       >
-        {spinning ? (
-          <ImSpinner11 className="inline-block animate-spin" />
-        ) : (
-          <ImSpinner11 className="inline-block" />
-        )}
+        {/* Aqui usamos a imagem do botão de spin */}
+        <img
+          src={spinning ? spinButtonPressedImg : spinButtonImg}
+          alt="Spin Button"
+          className="w-full h-full object-contain"
+        />
       </button>
 
       {/* Botão de aumentar valor da aposta (+) */}
@@ -41,7 +41,7 @@ const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpi
         onClick={onIncreaseBet}
         className="bg-yellow-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-yellow-600 transition-colors"
       >
-        <FaPlus className="text-sm" />
+        <FaPlus className="text-xl pulse-animation" /> {/* Animação aplicada sempre */}
       </button>
 
       {/* Botão de giro automático (Player) */}
@@ -49,7 +49,7 @@ const SpinButton = ({ onClick, spinning, onIncreaseBet, onDecreaseBet, onAutoSpi
         onClick={onAutoSpin}
         className="bg-purple-500 text-white w-8 h-8 flex items-center justify-center rounded-full shadow-lg hover:bg-purple-600 transition-colors"
       >
-        <FaPlay className="text-sm" />
+        <FaPlay className="text-xl pulse-animation" /> {/* Animação aplicada sempre */}
       </button>
     </div>
   );
