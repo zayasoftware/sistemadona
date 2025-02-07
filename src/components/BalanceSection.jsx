@@ -8,7 +8,6 @@ const BalanceSection = ({ balance, bet, lastWin, onBetChange }) => {
     <div className="flex justify-center my-4">
       <div className="w-full max-w-md p-2">
         <div className="flex flex-row justify-between items-center space-x-2">
-          {/* Saldo - Substituindo o ícone do FaWallet por um GIF */}
           <div className="flex items-center justify-center rounded-xl border-2 border-green-500 bg-green-800 p-2 shadow-lg hover:shadow-green-500 transition-shadow">
             <img src={walletGif} alt="Wallet" className="w-9 h-9 mr-2" />
             <span className="text-md font-semibold">{balance}</span>
