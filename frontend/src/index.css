@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1); /* Aumenta ligeiramente o botão */
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  /* Aplicar a animação de pulsação em todos os botões */
+  .pulse-animation {
+    animation: pulse 0.6s ease-in-out infinite;
+  }

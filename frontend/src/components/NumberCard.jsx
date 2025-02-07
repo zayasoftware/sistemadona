@@ -1,30 +1,18 @@
 import PropTypes from 'prop-types';
 
 const NumberCard = ({ numbers, spinning }) => {
-  // Lista de cores para os números
-  const colors = [
-    'bg-red-500',
-    'bg-blue-500',
-    'bg-yellow-500',
-    'bg-purple-500',
-    'bg-pink-500',
-    'bg-indigo-500',
-    'bg-green-500',
-    'bg-orange-500',
-    'bg-teal-500',
-    'bg-gray-500',
-  ];
-
   return (
-    <div className="flex justify-center space-x-4">
+    <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-6 gap-4 my-4">
       {numbers.map((num, index) => (
         <div
           key={index}
-          className={`w-12 h-12 flex items-center justify-center text-4xl font-bold rounded-full ${
-            colors[index % colors.length] // Usa a cor correspondente ao índice
-          } ${spinning ? 'animate-spin' : ''}`}
+          className={`w-12 h-12 flex items-center justify-center text-2xl font-bold rounded-full
+            ${num !== 0 ? 'bg-green-500 text-white' : ''}
+            transition-all duration-300
+          `}
         >
-          {spinning ? '?' : num}
+          {/* Mostra "?" enquanto está girando, senão exibe o número */}
+          {spinning && num === 0 ? '?' : num !== 0 ? num : ''}
         </div>
       ))}
     </div>
