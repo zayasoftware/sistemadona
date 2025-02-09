@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
@@ -11,6 +11,9 @@ import SpinButton from './components/SpinButton';
 import WinAnimation from './components/WinAnimation';
 import LoseAnimation from './components/LoseAnimation';
 import jackpotGif from './assets/jackpot.gif';
+import bigWinGif from './assets/bigWin.gif';
+import epicWinGif from './assets/epicWin.gif';
+import megaWinGif from './assets/megaWin.gif';
 import backgroundImage from './assets/background.webp';
 import globoSorteioGif from './assets/globo-sorteio.gif';  // Imagem animada de sorteio
 
@@ -31,6 +34,9 @@ function App() {
   const [showPrize, setShowPrize] = useState(false);
   const [showGlobeAnimation, setShowGlobeAnimation] = useState(false);  // Para mostrar o globo animado
   const [started, setStarted] = useState(false);  // Controle de visibilidade do NumberCard
+
+  const [animatedWinAmount, setAnimatedWinAmount] = useState(0);
+  const [isPrizeAnimationComplete, setIsPrizeAnimationComplete] = useState(false); // Estado para saber quando a animação termina
 
   // Tabela de multiplicadores com base no número de acertos
   const multiplicadores = {
@@ -94,8 +100,9 @@ function App() {
             setBalance((prev) => prev + premioBase);
             setShowWinAnimation(true);
             setShowPrize(true);
+            animateWinAmount(premioBase); // Chama a animação de prêmio crescente
             setTimeout(() => setShowWinAnimation(false), 3000);
-            setTimeout(() => setShowPrize(false), 3000);
+            setTimeout(() => setShowPrize(false), 10000);
           } else {
             setLastWin(0);
             setShowLoseAnimation(true);
@@ -109,6 +116,23 @@ function App() {
         }
       }, index * 600); // 600ms entre cada número (ajustar para mais rápido ou mais devagar)
     });
+  };
+
+  // Função de animação de prêmio crescente
+  const animateWinAmount = (totalPrize) => {
+    let currentAmount = 0;
+    const step = totalPrize / 100; // Aumento progressivo a cada intervalo
+
+    // Intervalo para aumentar o valor do prêmio até o total
+    const interval = setInterval(() => {
+      if (currentAmount >= totalPrize) {
+        clearInterval(interval); // Para a animação quando o valor total for alcançado
+        setIsPrizeAnimationComplete(true); // Indica que a animação do prêmio terminou
+      } else {
+        currentAmount += step; // Aumenta o valor progressivamente
+        setAnimatedWinAmount(Math.min(currentAmount, totalPrize)); // Garante que não passe do total
+      }
+    }, 30); // A cada 30ms aumenta o valor
   };
 
   // Gerar 15 números aleatórios (distintos) de 1..25
@@ -137,6 +161,23 @@ function App() {
     if (newBet > 0) {
       setBet(newBet);
     }
+  };
+
+  useEffect(() => {
+    if (isPrizeAnimationComplete) {
+      // Fechar pop-up 3 segundos após a contagem do prêmio ser concluída
+      const timeout = setTimeout(() => {
+        setShowPrize(false);
+      }, 10000); // 3 segundos após a animação do prêmio
+  
+      // Limpar o timeout caso o pop-up seja fechado antes
+      return () => clearTimeout(timeout);
+    }
+  }, [isPrizeAnimationComplete]); // Executa quando a animação do prêmio for concluída
+  
+  // Função para fechar o pop-up ao clicar fora
+  const closePrizePopup = () => {
+    setShowPrize(false);
   };
 
   return (
@@ -236,11 +277,16 @@ function App() {
 
       {/* Exibição do prêmio na tela principal */}
       {showPrize && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="animate-bounce bg-purple-800 p-8 rounded-lg text-center shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">🎉 Parabéns! Você ganhou! 🎉</h2>
-            <p className="text-xl mb-4">Prêmio: ${lastWin}</p>
-            <p className="text-lg mb-4">Números sorteados: {resultNumbers.join(', ')}</p>
+        <div className="fixed inset-0 flex items-center justify-center z-50" onClick={closePrizePopup}>
+          <div className="animate-bounce rounded-lg text-center shadow-lg" onClick={(e) => e.stopPropagation()}>
+            {lastWin >= 1000 ? (
+              <img src={megaWinGif} alt="Mega Win" className="w-full h-full mx-auto mb-4" />
+            ) : lastWin >= 500 ? (
+              <img src={epicWinGif} alt="Epic Win" className="w-full h-full mx-auto mb-4" />
+            ) : (
+              <img src={bigWinGif} alt="Big Win" className="w-full h-full mx-auto mb-4" />
+            )}
+            <p className='text-4xl font-semibold bg-black/50 text-green-500'>R${animatedWinAmount.toFixed(2)}</p>
           </div>
         </div>
       )}
